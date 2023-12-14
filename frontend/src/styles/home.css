@@ -1,0 +1,127 @@
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+nav{position: relative; z-index: 1}
+
+nav p{
+    cursor: pointer;
+    padding: 0.5vw 1vw;
+    display: inline-block
+}
+
+span img, #see-container span{
+    height: calc(5vh - 4vmin);
+    width: auto;
+    padding: 2vmin
+}
+
+nav #panel{
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    height: 8vh;
+    display: flex;
+    flex-direction: column;
+    background: red;
+    z-index: 2;
+    text-align: center;
+    transition: 0.3s all ease-in-out;
+}
+
+#main-home{
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 3vh;
+    background: #fff;
+    align-items: center;
+}
+
+#add-container{
+    width: 40vw;
+    min-width: 300px;
+    max-width: 500px;
+    height: calc(40vh - 4vh);
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: blue;
+    border-radius: 5px
+}
+
+#see-container{
+    width: calc(80vw - 4vmin);
+    padding: 2vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vh;
+    overflow-y: auto;
+    border-radius: 5px;
+    background-color: #00f
+}
+
+#see-container article{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    position: relative;
+}
+
+#see-container ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    width: calc(80vw - 4vmin);
+    height: 3vh;
+    max-width: calc(80vw - 8vmin);
+    background: red;
+    padding: 2vmin;
+    overflow: hidden;
+}
+
+#see-container li{
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+
+#see-container #open{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 2vmin;
+}
+
+#see-container img{
+    position: absolute;
+    top: 0vmin;
+    right: 0vmin;
+    padding: 2vmin 2vmin 0 2vmin;
+    cursor: pointer;
+}
+
+#see-container span{
+    position: absolute;
+    top:  25%;
+    right: 0;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    background-color: rgb(255, 50, 50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10%;
+}
