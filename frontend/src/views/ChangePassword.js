@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import bcrypt from 'bcryptjs-react'
 
+const ServerUrl = 'https://stand-by.onrender.com';
+
 const ChangePassword = () => {
 
     const [oldPassword, setOldPassword] = useState('')
@@ -17,7 +19,7 @@ const ChangePassword = () => {
     const UpdateUser = async (pass) => {
         let newUser = USER
         newUser.password = pass
-        await axios.put(`http://localhost:8000/users/${USER._id}`, newUser)
+        await axios.put(`${ServerUrl}/users/${USER._id}`, newUser)
         sessionStorage.setItem('USER', '{}')
         navigate('/login')
     }

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import CryptoJS from "crypto-js";
 
 const secretPass = "XkhZG4fW2t2W";
+const ServerUrl = 'https://stand-by.onrender.com';
 
 const Home = () => {
 
@@ -29,7 +30,7 @@ const Home = () => {
     const Decrypt = (text) => CryptoJS.AES.decrypt(text, secretPass).toString(CryptoJS.enc.Utf8);
 
     const FetchAccounts = async () => {
-        const data = await axios.get(`http://localhost:8000/users/${USER._id}`)
+        const data = await axios.get(`${ServerUrl}/users/${USER._id}`)
         sessionStorage.setItem('USER', JSON.stringify(data.data))
         setUserAccounts(data.data.accounts)
     }
@@ -40,7 +41,7 @@ const Home = () => {
         const UpdateUser = async (newA) => {
             USER.accounts.push(newA)
             sessionStorage.setItem('USER', JSON.stringify(USER))
-            await axios.put(`http://localhost:8000/users/${USER._id}`, USER)
+            await axios.put(`${ServerUrl}/users/${USER._id}`, USER)
             FetchAccounts()
             document.getElementById('website').value = ''
             document.getElementById('username').value = ''
@@ -107,7 +108,7 @@ const Home = () => {
             newAccounts.push(USER.accounts[i])
         }
         newUser.accounts = newAccounts
-        await axios.put(`http://localhost:8000/users/${USER._id}`, newUser)
+        await axios.put(`${ServerUrl}/users/${USER._id}`, newUser)
         FetchAccounts()
     }
 
@@ -136,13 +137,15 @@ const Home = () => {
                 <button onClick={() => Validate()}>Save</button>
             </section>
             <section id="see-container" style={(isExpanding) ? {height: `${Math.floor(containerHeight * 0.7)}px`} : {height: `${Math.floor(containerHeight * 0.3)}px`}}>
-                    {userAccountsDisHashed.map((account, key) => (<article key={key}><ul onClick={() => OpenOrClose(key)} id={(key === opened) ? 'open': 'close'}>
-                                                        <img onClick={() => DeleteAccount(key)} src={require('../icons/delete.png')} title="Delete account" alt={`Img #${key}`}/>
-                                                        <li>{account.websiteName} account</li>
-                                                        <li>Username: {account.username} <span title="Copy username to clipboard" onClick={() => Copy(account.username)}>Copy</span></li>
-                                                        <li>Password: {account.password} <span title="Copy password to clipboard" onClick={() => Copy(account.password)}>Copy</span></li>
-                                                        </ul>
-                                                    </article>))}
+                    {userAccountsDisHashed.map((account, key) => (
+                        <article key={key}><ul onClick={() => OpenOrClose(key)} id={(key === opened) ? 'open': 'close'}>
+                            <img onClick={() => DeleteAccount(key)} src={require('../icons/delete.png')} title="Delete account" alt={`Img #${key}`}/>
+                            <li>{account.websiteName} account</li>
+                            <li>Username: {account.username} <span title="Copy username to clipboard" onClick={() => Copy(account.username)}>Copy</span></li>
+                            <li>Password: {account.password} <span title="Copy password to clipboard" onClick={() => Copy(account.password)}>Copy</span></li>
+                            </ul>
+                        </article>
+                    ))}
             </section>
             <button style={{position: 'relative'}} onClick={() => Expand()} >{(!isExpanding) ? 'Expand' : 'Minimize'}</button>
             </main>

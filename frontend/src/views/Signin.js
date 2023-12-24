@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs-react'
 
+const ServerUrl = 'https://stand-by.onrender.com';
+
 const Signin = () => {
 
     const [name, setName] = useState('')
@@ -15,7 +17,7 @@ const Signin = () => {
     const navigate = useNavigate()
 
     const Validate = async () => {
-        let usersRightNow = await axios.get("http://localhost:8000/users")
+        let usersRightNow = await axios.get(`${ServerUrl}/users`)
         if(name.length < 1 || username.length < 1 || password.length < 1 || repeatedPassword.length < 1){
             setMessage('Field or fileds empty...')
             return
@@ -27,7 +29,7 @@ const Signin = () => {
             return
         }else{
             const PostIt = async () => {
-                await axios.post("http://localhost:8000/users", newUser)
+                await axios.post(`${ServerUrl}/users`, newUser)
                 navigate('/login')
             }
             let newUser = { name, username }

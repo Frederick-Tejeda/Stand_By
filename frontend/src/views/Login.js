@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs-react'
 
+const ServerUrl = 'https://stand-by.onrender.com';
+
 const Login = () => {
 
     const [username, setUsername] = useState('')
@@ -15,7 +17,7 @@ const Login = () => {
 
     const Validate = async () => {
 
-        let users = await axios.get("http://localhost:8000/users")
+        let users = await axios.get(`${ServerUrl}/users`)
         users = users.data;
 
         if(username.length < 1 || password.length < 1){
